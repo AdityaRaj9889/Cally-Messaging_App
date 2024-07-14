@@ -1,8 +1,6 @@
 import 'package:callingapp/constant/assets.dart';
-import 'package:callingapp/constant/const.dart';
 import 'package:callingapp/controller/profileController.dart';
 import 'package:callingapp/widgetComponents/appbar.dart';
-import 'package:callingapp/widgetComponents/button.dart';
 import 'package:callingapp/widgetComponents/errorbox.dart';
 import 'package:callingapp/widgetComponents/horizontalLine.dart';
 import 'package:callingapp/widgetComponents/loader.dart';

@@ -27,6 +27,8 @@ class AssetsSVG {
   static const String audio = 'assets/svg/audio.svg';
   static const String location = 'assets/svg/location.svg';
   static const String contact = 'assets/svg/contact.svg';
+  static const String attachment = 'assets/svg/attachment.svg';
+  static const String search = 'assets/svg/search.svg';
 }
 
 class ColorConst {

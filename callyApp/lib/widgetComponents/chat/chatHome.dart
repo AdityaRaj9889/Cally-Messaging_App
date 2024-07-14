@@ -55,7 +55,7 @@ class ChatHomeWidget extends GetView<HomeController> {
           Expanded(
             child: ListView.builder(
               itemCount: 5,
-              itemBuilder: (context, index) => GestureDetector(
+              itemBuilder: (context, index) => InkWell(
                 onTap: () => Get.toNamed(Routes.CHAT),
                 child: ChatCard(
                   profilePic: AssetsImage.appLogo,

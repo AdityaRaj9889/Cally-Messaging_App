@@ -1,3 +1,4 @@
+import 'package:callingapp/app_pages.dart';
 import 'package:callingapp/constant/assets.dart';
 import 'package:callingapp/controller/homeController.dart';
 import 'package:callingapp/widgetComponents/appbar.dart';
@@ -19,10 +20,13 @@ class HomeScreen extends GetView<HomeController> {
           appBar: AppbarWidget(
             title: 'WhatsApp'.obs,
             leading: false,
-            firstIcon: AssetsSVG.camera.obs,
+            firstIcon: AssetsSVG.search.obs,
             fIconClick: () {},
-            lastIcon: AssetsSVG.more.obs,
-            lIconClick: () {},
+            secondIcon: AssetsSVG.camera.obs,
+            sIconClick: () {
+              Get.toNamed(Routes.PROFILE);
+            },
+            moreOption: true,
           ),
           body: Column(
             children: [

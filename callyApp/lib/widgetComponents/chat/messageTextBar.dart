@@ -4,36 +4,26 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class MessageTextBar extends GetView {
-  final bool replying;
   final String replyingTo;
-  final List<Widget> actions;
   final TextEditingController _textController = TextEditingController();
-  final Color replyWidgetColor;
-  final Color replyIconColor;
-  final Color replyCloseColor;
-  final Color messageBarColor;
   final String messageBarHitText;
   final TextStyle messageBarHintStyle;
-  final Color sendButtonColor;
   final void Function(String)? onTextChanged;
-  final void Function(String)? onSend;
   final void Function()? onTapCloseReply;
+  final void Function()? onTapEmoji;
+  final void Function()? onTapAttachment;
+  final void Function()? onSend;
 
   MessageTextBar({
     super.key,
-    this.replying = false,
     this.replyingTo = "",
-    this.actions = const [],
-    this.replyWidgetColor = const Color(0xffF4F4F5),
-    this.replyIconColor = Colors.blue,
-    this.replyCloseColor = Colors.black12,
-    this.messageBarColor = Colors.white,
-    this.sendButtonColor = Colors.blue,
     this.messageBarHitText = "Type your message here",
     this.messageBarHintStyle = const TextStyle(fontSize: 16),
     this.onTextChanged,
-    this.onSend,
     this.onTapCloseReply,
+    this.onTapEmoji,
+    this.onTapAttachment,
+    this.onSend,
   });
 
   @override
@@ -44,9 +34,9 @@ class MessageTextBar extends GetView {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            replying
+            replyingTo.isNotEmpty
                 ? Container(
-                    color: replyWidgetColor,
+                    color: ColorConst.color1.withOpacity(0.18),
                     padding: const EdgeInsets.symmetric(
                       vertical: 8,
                       horizontal: 16,
@@ -55,43 +45,70 @@ class MessageTextBar extends GetView {
                       children: [
                         Icon(
                           Icons.reply,
-                          color: replyIconColor,
+                          color: ColorConst.color1,
                           size: 24,
                         ),
                         Expanded(
-                          child: Container(
-                            child: Text(
-                              'Re : ' + replyingTo,
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                ' Re : ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: ColorConst.color7,
+                                ),
+                              ),
+                              Text(
+                                replyingTo,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                  color: ColorConst.color7,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
                           ),
                         ),
                         InkWell(
                           onTap: onTapCloseReply,
                           child: Icon(
                             Icons.close,
-                            color: replyCloseColor,
+                            color: ColorConst.color7,
                             size: 24,
                           ),
                         ),
                       ],
                     ))
                 : Container(),
-            replying
+            replyingTo.isNotEmpty
                 ? Container(
                     height: 1,
                     color: Colors.grey.shade300,
                   )
                 : Container(),
             Container(
-              color: messageBarColor,
+              color: ColorConst.color3,
               padding: const EdgeInsets.symmetric(
                 vertical: 8,
-                horizontal: 16,
+                // horizontal: 10,
               ),
               child: Row(
                 children: <Widget>[
-                  ...actions,
+                  GestureDetector(
+                    onTap: onTapEmoji,
+                    child: Container(
+                      height: 43,
+                      width: 43,
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      color: ColorConst.color3,
+                      child: SvgPicture.asset(
+                        AssetsSVG.emoji,
+                        color: ColorConst.color1,
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: Container(
                       child: TextFormField(
@@ -116,17 +133,6 @@ class MessageTextBar extends GetView {
                               width: 1,
                             ),
                           ),
-                          suffix: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 20,
-                              width: 20,
-                              child: SvgPicture.asset(
-                                AssetsSVG.send,
-                                color: ColorConst.color1,
-                              ),
-                            ),
-                          ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: BorderSide(
@@ -138,14 +144,24 @@ class MessageTextBar extends GetView {
                       ),
                     ),
                   ),
+                  GestureDetector(
+                    onTap: onTapAttachment,
+                    child: Container(
+                      height: 43,
+                      width: 43,
+                      padding: const EdgeInsets.all(8.0),
+                      color: ColorConst.color3,
+                      child: SvgPicture.asset(
+                        AssetsSVG.attachment,
+                        color: ColorConst.color1,
+                      ),
+                    ),
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16),
+                    padding: const EdgeInsets.only(right: 9),
                     child: GestureDetector(
                       onTap: () {
                         if (_textController.text.trim() != '') {
-                          if (onSend != null) {
-                            onSend!(_textController.text.trim());
-                          }
                           _textController.text = '';
                         }
                       },
@@ -154,15 +170,16 @@ class MessageTextBar extends GetView {
                         width: 43,
                         padding: const EdgeInsets.all(9.0),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: ColorConst.color1,
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorConst.color4,
-                                blurRadius: 10,
-                                spreadRadius: 0.5,
-                              ),
-                            ]),
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorConst.color1,
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorConst.color4,
+                              blurRadius: 10,
+                              spreadRadius: 0.5,
+                            )
+                          ],
+                        ),
                         child: SvgPicture.asset(
                           AssetsSVG.send,
                           color: ColorConst.color3,

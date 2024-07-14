@@ -1,3 +1,4 @@
+import 'package:callingapp/app_pages.dart';
 import 'package:callingapp/constant/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,6 +15,7 @@ class AppbarWidget extends GetView<AppbarWidget>
   final void Function()? lIconClick;
   final bool leading;
   final String profile;
+  final bool? moreOption;
 
   const AppbarWidget({
     super.key,
@@ -26,6 +28,7 @@ class AppbarWidget extends GetView<AppbarWidget>
     this.lIconClick,
     this.leading = true,
     this.profile = '',
+    this.moreOption = false,
   });
 
   @override
@@ -134,6 +137,57 @@ class AppbarWidget extends GetView<AppbarWidget>
                             ),
                           ),
                         ),
+                  if (moreOption as bool)
+                    PopupMenuButton(
+                      color: ColorConst.color3,
+                      onSelected: (value) {
+                        if (value == "profile") {
+                          Get.toNamed(Routes.PROFILE);
+                        } else if (value == "about") {
+                          // Get.toNamed(Routes.PROFILE);
+                        }
+                      },
+                      itemBuilder: (context) {
+                        return [
+                          PopupMenuItem(
+                            value: "profile",
+                            child: Text(
+                              "Profile",
+                              style: TextStyle(
+                                color: ColorConst.color7,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: "about",
+                            child: Text(
+                              "About",
+                              style: TextStyle(
+                                color: ColorConst.color7,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ];
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 15.0),
+                        height: 35,
+                        width: 35,
+                        padding: const EdgeInsets.all(9.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: ColorConst.color10,
+                        ),
+                        child: SvgPicture.asset(
+                          AssetsSVG.more,
+                          color: ColorConst.color1,
+                        ),
+                      ),
+                    )
                 ],
               ),
             ],
