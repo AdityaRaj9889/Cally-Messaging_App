@@ -5,25 +5,24 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 class MessageTextBar extends GetView {
   final String replyingTo;
-  final TextEditingController _textController = TextEditingController();
+  final TextEditingController? textController;
   final String messageBarHitText;
   final TextStyle messageBarHintStyle;
-  final void Function(String)? onTextChanged;
+  final void Function()? onTextTap;
   final void Function()? onTapCloseReply;
   final void Function()? onTapEmoji;
   final void Function()? onTapAttachment;
-  final void Function()? onSend;
 
   MessageTextBar({
     super.key,
     this.replyingTo = "",
+    this.textController,
     this.messageBarHitText = "Type your message here",
     this.messageBarHintStyle = const TextStyle(fontSize: 16),
-    this.onTextChanged,
+    this.onTextTap,
     this.onTapCloseReply,
     this.onTapEmoji,
     this.onTapAttachment,
-    this.onSend,
   });
 
   @override
@@ -112,12 +111,12 @@ class MessageTextBar extends GetView {
                   Expanded(
                     child: Container(
                       child: TextFormField(
-                        controller: _textController,
+                        controller: textController,
                         keyboardType: TextInputType.multiline,
                         textCapitalization: TextCapitalization.sentences,
                         minLines: 1,
                         maxLines: 3,
-                        onChanged: onTextChanged,
+                        onTap: onTextTap,
                         decoration: InputDecoration(
                           hintText: messageBarHitText,
                           hintMaxLines: 1,
@@ -161,8 +160,8 @@ class MessageTextBar extends GetView {
                     padding: const EdgeInsets.only(right: 9),
                     child: GestureDetector(
                       onTap: () {
-                        if (_textController.text.trim() != '') {
-                          _textController.text = '';
+                        if (textController!.text.trim() != '') {
+                          textController!.text = '';
                         }
                       },
                       child: Container(

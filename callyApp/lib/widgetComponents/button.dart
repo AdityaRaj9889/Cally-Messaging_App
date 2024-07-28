@@ -38,7 +38,9 @@ class ClickableButton extends GetView<ClickableButton> {
           vertical: verticalPadding,
         ),
         textStyle: TextStyle(
-            color: ColorConst.color3, fontSize: 18, fontStyle: FontStyle.normal),
+            color: ColorConst.color3,
+            fontSize: 18,
+            fontStyle: FontStyle.normal),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius))),
         shadowColor: ColorConst.color4,

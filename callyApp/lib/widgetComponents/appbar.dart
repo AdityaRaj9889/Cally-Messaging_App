@@ -17,7 +17,7 @@ class AppbarWidget extends GetView<AppbarWidget>
   final String profile;
   final bool? moreOption;
 
-  const AppbarWidget({
+  AppbarWidget({
     super.key,
     required this.title,
     this.firstIcon,
@@ -33,6 +33,8 @@ class AppbarWidget extends GetView<AppbarWidget>
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
+
+  List<String> menuList = ["Contact", "New Chat", "New Group", "Settings"];
 
   @override
   Widget build(BuildContext context) {
@@ -141,37 +143,26 @@ class AppbarWidget extends GetView<AppbarWidget>
                     PopupMenuButton(
                       color: ColorConst.color3,
                       onSelected: (value) {
-                        if (value == "profile") {
+                        if (value == "Profile") {
                           Get.toNamed(Routes.PROFILE);
                         } else if (value == "about") {
                           // Get.toNamed(Routes.PROFILE);
                         }
                       },
                       itemBuilder: (context) {
-                        return [
-                          PopupMenuItem(
-                            value: "profile",
+                        return List.generate(menuList.length, (index) {
+                          return PopupMenuItem(
+                            value: menuList[index],
                             child: Text(
-                              "Profile",
+                              menuList[index],
                               style: TextStyle(
                                 color: ColorConst.color7,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
-                          ),
-                          PopupMenuItem(
-                            value: "about",
-                            child: Text(
-                              "About",
-                              style: TextStyle(
-                                color: ColorConst.color7,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ];
+                          );
+                        });
                       },
                       child: Container(
                         margin: const EdgeInsets.only(right: 15.0),
