@@ -3,7 +3,8 @@ import 'package:callingapp/controller/splashController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SplashScreen extends GetView<SplashController>{
+class SplashScreen extends GetView<SplashController> {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class SplashScreen extends GetView<SplashController>{
                             padding: const EdgeInsets.all(20.0),
                             child: CircularProgressIndicator(
                               backgroundColor: ColorConst.color2,
-                              valueColor: AlwaysStoppedAnimation(ColorConst.color1),
+                              valueColor:
+                                  AlwaysStoppedAnimation(ColorConst.color1),
                               strokeWidth: 5,
                             ),
                           ),

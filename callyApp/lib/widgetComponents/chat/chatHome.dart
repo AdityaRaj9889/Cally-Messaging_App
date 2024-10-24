@@ -7,6 +7,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class ChatHomeWidget extends GetView<HomeController> {
+  const ChatHomeWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(

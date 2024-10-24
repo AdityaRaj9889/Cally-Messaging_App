@@ -5,16 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeTabs extends GetView<HomeController> {
+  const HomeTabs({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (controller) => Column(
         children: [
-          const SizedBox(height: 10.0,),
+          const SizedBox(
+            height: 10.0,
+          ),
           Container(
             color: ColorConst.color3,
-            padding: const EdgeInsets.only(left: 15, right: 15,),
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+            ),
             height: 50,
             child: Obx(
               () => TabBar(
@@ -97,7 +103,8 @@ class HomeTabs extends GetView<HomeController> {
                                   child: Text(
                                     controller.statusCount.value > 99
                                         ? "99+"
-                                        : controller.statusCount.value.toString(),
+                                        : controller.statusCount.value
+                                            .toString(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       color: ColorConst.color3,

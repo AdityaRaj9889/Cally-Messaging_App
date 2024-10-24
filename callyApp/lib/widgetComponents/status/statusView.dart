@@ -13,8 +13,9 @@ class StatusView extends GetView {
   final Color seenColor;
   final Color unSeenColor;
 
-  StatusView(
-      {this.numberOfStatus = 10,
+  const StatusView(
+      {super.key,
+      this.numberOfStatus = 10,
       this.indexOfSeenStatus = 0,
       this.spacing = 10.0,
       this.size = 57,
@@ -30,7 +31,7 @@ class StatusView extends GetView {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
+          SizedBox(
             width: size,
             height: size,
             child: CustomPaint(

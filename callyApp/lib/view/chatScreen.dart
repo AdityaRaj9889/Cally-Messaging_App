@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:callingapp/app_pages.dart';
 import 'package:callingapp/constant/assets.dart';
 import 'package:callingapp/controller/chatController.dart';
 import 'package:callingapp/widgetComponents/appbar.dart';
@@ -10,23 +11,26 @@ import 'package:callingapp/widgetComponents/chat/moreOptionItems.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/foundation.dart' as foundation;
 
 class ChatScreen extends GetView<ChatController> {
+  const ChatScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => GestureDetector(
-        onTap: () => controller.showEmoji.toggle(),
+        onTap: controller.showEmoji.value
+            ? () => controller.showEmoji.toggle()
+            : null,
         child: Scaffold(
           backgroundColor: ColorConst.color3,
           appBar: AppbarWidget(
             title: "Allen".obs,
             profile: AssetsImage.appLogo,
             firstIcon: AssetsSVG.phone.obs,
-            fIconClick: () {},
+            fIconClick: () => Get.toNamed(Routes.CALLHOME),
             secondIcon: AssetsSVG.video.obs,
-            sIconClick: () {},
+            sIconClick: () => Get.toNamed(Routes.CALLHOME),
             lastIcon: AssetsSVG.more.obs,
             lIconClick: () {},
           ),
@@ -164,14 +168,14 @@ class ChatScreen extends GetView<ChatController> {
                 onTapAttachment: () => controller.showAttachmentMenu.toggle(),
                 onTapEmoji: () {
                   FocusScope.of(context).unfocus();
-                  Timer(Duration(milliseconds: 300),
+                  Timer(const Duration(milliseconds: 300),
                       () => controller.showEmoji.toggle());
                 },
               ),
               if (controller.showEmoji.value)
                 GetBuilder<ChatController>(
                   builder: (controller) {
-                    return Container(
+                    return SizedBox(
                       height: 270,
                       child: EmojiPicker(
                         onBackspacePressed: () {},

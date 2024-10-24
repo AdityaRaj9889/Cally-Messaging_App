@@ -30,7 +30,7 @@ class DateBubble extends GetView {
           padding: const EdgeInsets.all(5.0),
           child: Text(
             getDateText(date),
-            style: TextStyle(fontSize: 12),
+            style: const TextStyle(fontSize: 12),
           ),
         ),
       ),

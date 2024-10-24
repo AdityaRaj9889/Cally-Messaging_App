@@ -13,11 +13,12 @@ class Checkfield extends GetView<Checkfield> {
       () => Row(
         children: [
           Checkbox(
-            fillColor: MaterialStateProperty.all(ColorConst.color1),
-            side: MaterialStateBorderSide.resolveWith((states) {
+            fillColor: WidgetStateProperty.all(ColorConst.color1),
+            side: WidgetStateBorderSide.resolveWith((states) {
               return BorderSide(color: ColorConst.color1, width: 2.0);
             }),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
             checkColor: ColorConst.color3,
             value: checked.value,
             onChanged: (bool? val) {

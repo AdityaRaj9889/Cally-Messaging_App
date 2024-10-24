@@ -13,6 +13,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class OtpVerifyScreen extends GetView<OtpVerifyController> {
+  const OtpVerifyScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -388,7 +390,8 @@ class OtpVerifyScreen extends GetView<OtpVerifyController> {
                             controller.validate.toggle();
                           } else {
                             controller.isLoading.value = true;
-                            Timer(Duration(seconds: 2), () => Get.offAllNamed(Routes.HOME));
+                            Timer(const Duration(seconds: 2),
+                                () => Get.offAllNamed(Routes.HOME));
                           }
                         },
                       ),

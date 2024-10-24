@@ -29,6 +29,8 @@ class AssetsSVG {
   static const String contact = 'assets/svg/contact.svg';
   static const String attachment = 'assets/svg/attachment.svg';
   static const String search = 'assets/svg/search.svg';
+  static const String speaker = 'assets/svg/speaker.svg';
+  static const String cancel = 'assets/svg/cancel.svg';
 }
 
 class ColorConst {
@@ -43,4 +45,5 @@ class ColorConst {
   static Color color9 = const Color(0xFF434242);
   static Color color10 = const Color(0x2821CC82);
   static Color color11 = const Color(0xFFF4F6F9);
+  static Color color12 = const Color(0xFFFFE8ED);
 }

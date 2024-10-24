@@ -13,7 +13,7 @@ class MessageTextBar extends GetView {
   final void Function()? onTapEmoji;
   final void Function()? onTapAttachment;
 
-  MessageTextBar({
+  const MessageTextBar({
     super.key,
     this.replyingTo = "",
     this.textController,

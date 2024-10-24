@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class CallHomeWidget extends GetView<HomeController> {
+  const CallHomeWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -6,6 +6,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class StatusHomeWidget extends GetView<HomeController> {
+  const StatusHomeWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(

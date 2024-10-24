@@ -99,12 +99,12 @@ class ChatBubble extends GetView {
                     children: [
                       Text(
                         msgTime.toString(),
-                        style: TextStyle(fontSize: 11.5),
+                        style: const TextStyle(fontSize: 11.5),
                       ),
                       stateIcon != null && stateTick
                           ? Row(
                               children: [
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 stateIcon,
                               ],
                             )
@@ -152,9 +152,9 @@ class BubbleShape extends CustomPainter {
               topLeft: Radius.circular(_radius),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
-        var path = new Path();
+        var path = Path();
         path.moveTo(size.width - _x, 0);
         path.lineTo(size.width - _x, 10);
         path.lineTo(size.width, 0);
@@ -168,7 +168,7 @@ class BubbleShape extends CustomPainter {
               topRight: const Radius.circular(3),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
       } else {
         canvas.drawRRect(
@@ -183,7 +183,7 @@ class BubbleShape extends CustomPainter {
               topRight: Radius.circular(_radius),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
       }
     } else {
@@ -199,9 +199,9 @@ class BubbleShape extends CustomPainter {
               bottomLeft: Radius.circular(_radius),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
-        var path = new Path();
+        var path = Path();
         path.moveTo(_x, 0);
         path.lineTo(_x, 10);
         path.lineTo(0, 0);
@@ -215,7 +215,7 @@ class BubbleShape extends CustomPainter {
               topLeft: const Radius.circular(3),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
       } else {
         canvas.drawRRect(
@@ -230,7 +230,7 @@ class BubbleShape extends CustomPainter {
               topLeft: Radius.circular(_radius),
             ),
             Paint()
-              ..color = this.color
+              ..color = color
               ..style = PaintingStyle.fill);
       }
     }

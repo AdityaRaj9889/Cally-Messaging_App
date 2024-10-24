@@ -5,9 +5,10 @@ import 'package:callingapp/widgetComponents/button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnboadingScreen extends GetView<OnboadingController>{
+class OnboadingScreen extends GetView<OnboadingController> {
+  const OnboadingScreen({super.key});
+
   @override
-  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorConst.color3,
@@ -53,5 +54,4 @@ class OnboadingScreen extends GetView<OnboadingController>{
       ),
     );
   }
-
 }

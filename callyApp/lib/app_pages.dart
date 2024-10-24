@@ -7,7 +7,9 @@ import 'package:callingapp/binding/onboadingBinding.dart';
 import 'package:callingapp/binding/otpVerifyBinding.dart';
 import 'package:callingapp/binding/profileBinding.dart';
 import 'package:callingapp/binding/splashBinding.dart';
+import 'package:callingapp/binding/callHomeBinding.dart';
 import 'package:callingapp/view/authScreen.dart';
+import 'package:callingapp/view/callHomeScreen.dart';
 import 'package:callingapp/view/chatScreen.dart';
 import 'package:callingapp/view/homeScreen.dart';
 import 'package:callingapp/view/onboadingScreen.dart';
@@ -58,6 +60,11 @@ class AppPages {
       name: _Paths.CHAT,
       page: () => ChatScreen(),
       binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.CALLHOME,
+      page: () => CallHomeScreen(),
+      binding: CallHomeBinding(),
     ),
   ];
 }
