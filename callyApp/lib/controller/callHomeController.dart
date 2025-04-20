@@ -12,13 +12,24 @@ class CallHomeController extends GetxController {
   RxString callStatus = "Ringing...".obs;
 
   RxBool isSpeker = false.obs;
+  RxBool isConnected = false.obs;
+
+  String callType = "";
+  String serviceType = "";
 
   @override
   void onInit() {
-    Timer(const Duration(seconds: 5), () {
-      startCallTimer();
-    });
+    var param = Get.parameters;
+    callType = param["callType"] ?? "";
+    serviceType = param["serviceType"] ?? "";
     super.onInit();
+
+    if (callType == 'O') Timer(Duration(seconds: 5), () => callConnected());
+  }
+
+  void callConnected() {
+    isConnected.value = true;
+    startCallTimer();
   }
 
   void startCallTimer() {
@@ -37,5 +48,13 @@ class CallHomeController extends GetxController {
       callStatus.value =
           "${hours.value.toString().padLeft(2, '0')}: ${minutes.value.toString().padLeft(2, '0')}: ${seconds.value.toString().padLeft(2, '0')} mins";
     });
+  }
+
+  void setSpeker() {
+    isSpeker.toggle();
+  }
+
+  void endCall() {
+    Get.back();
   }
 }

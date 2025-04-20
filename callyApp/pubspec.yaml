@@ -20,6 +20,7 @@ dependencies:
   flutter_svg: ^1.1.6
   intl: ^0.18.1
   emoji_picker_flutter: ^1.6.4
+  simple_ripple_animation: ^0.1.0
 
 dev_dependencies:
   flutter_test:
