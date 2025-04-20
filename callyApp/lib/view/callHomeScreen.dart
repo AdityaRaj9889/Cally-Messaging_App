@@ -19,13 +19,11 @@ class CallHomeScreen extends GetView<CallHomeController> {
           backgroundColor: ColorConst.color3,
           body: Center(
             child: Callscreen(
-              // type: "O",
-              // type: "I",
-              profilePic: AssetsImage.appLogo,
-              name: "Kristin Waston",
-              // serviceType: "V",
-              // serviceType: "I",
-            ),
+                // type: "O",
+                // type: "I",
+                // serviceType: "V",
+                // serviceType: "I",
+                ),
           ),
         ),
       ),

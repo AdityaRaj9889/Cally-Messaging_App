@@ -1,9 +1,14 @@
 import 'dart:async';
 
+import 'package:callingapp/constant/assets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CallHomeController extends GetxController {
   RxBool isLoading = false.obs;
+
+  String profilePic = AssetsImage.appLogo;
+  String name = "Kristin Waston";
 
   RxInt hours = 0.obs;
   RxInt minutes = 0.obs;
@@ -13,6 +18,10 @@ class CallHomeController extends GetxController {
 
   RxBool isSpeker = false.obs;
   RxBool isConnected = false.obs;
+
+  var dragOffset = 0.0.obs;
+  Rx<Color> iconContainerColor = ColorConst.color2.obs;
+  Rx<Color> iconColor = ColorConst.color1.obs;
 
   String callType = "";
   String serviceType = "";

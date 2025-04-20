@@ -1,24 +1,12 @@
 import 'package:callingapp/constant/assets.dart';
 import 'package:callingapp/controller/callHomeController.dart';
-import 'package:callingapp/widgetComponents/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 class Callscreen extends GetView<CallHomeController> {
-  final String profilePic;
-  final String name;
-
-  Callscreen({
-    required this.profilePic,
-    required this.name,
-    super.key,
-  });
-
-  var dragOffset = 0.0.obs;
-  Rx<Color> iconContainerColor = ColorConst.color2.obs;
-  Rx<Color> iconColor = ColorConst.color1.obs;
+  const Callscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +18,7 @@ class Callscreen extends GetView<CallHomeController> {
           ClipRRect(
             borderRadius: BorderRadius.circular(100.0),
             child: Image.asset(
-              profilePic,
+              controller.profilePic,
               height: Get.height * 0.18,
               width: Get.height * 0.18,
             ),
@@ -39,7 +27,7 @@ class Callscreen extends GetView<CallHomeController> {
             height: 25,
           ),
           Text(
-            name,
+            controller.name,
             style: TextStyle(
               letterSpacing: 0.3,
               fontWeight: FontWeight.w700,
@@ -115,40 +103,41 @@ class Callscreen extends GetView<CallHomeController> {
               : GestureDetector(
                   onHorizontalDragUpdate: (details) {
                     final maxSlide = Get.width / 2 - 40;
-                    dragOffset.value += details.delta.dx;
-                    dragOffset.value =
-                        dragOffset.value.clamp(-maxSlide, maxSlide);
+                    controller.dragOffset.value += details.delta.dx;
+                    controller.dragOffset.value =
+                        controller.dragOffset.value.clamp(-maxSlide, maxSlide);
 
-                    if (dragOffset.value > maxSlide - 15) {
-                      iconContainerColor.value = ColorConst.color5;
-                      iconColor.value = ColorConst.color3;
-                    } else if (dragOffset.value < 15 - maxSlide) {
-                      iconContainerColor.value = ColorConst.color1;
-                      iconColor.value = ColorConst.color3;
+                    if (controller.dragOffset.value > maxSlide - 15) {
+                      controller.iconContainerColor.value = ColorConst.color5;
+                      controller.iconColor.value = ColorConst.color3;
+                    } else if (controller.dragOffset.value < 15 - maxSlide) {
+                      controller.iconContainerColor.value = ColorConst.color1;
+                      controller.iconColor.value = ColorConst.color3;
                     } else {
-                      iconContainerColor.value = ColorConst.color2;
-                      iconColor.value = ColorConst.color1;
+                      controller.iconContainerColor.value = ColorConst.color2;
+                      controller.iconColor.value = ColorConst.color1;
                     }
                   },
                   onHorizontalDragEnd: (details) {
                     final maxSlide = Get.width / 2 - 40;
 
-                    if (dragOffset.value > maxSlide - 15) {
+                    if (controller.dragOffset.value > maxSlide - 15) {
                       controller.endCall();
-                    } else if (dragOffset.value < 15 - maxSlide) {
+                    } else if (controller.dragOffset.value < 15 - maxSlide) {
                       controller.callConnected();
                     }
 
                     // Animate back to center
                     Future.microtask(() async {
                       await Future.delayed(const Duration(milliseconds: 100));
-                      while (dragOffset.value.abs() > 1) {
+                      while (controller.dragOffset.value.abs() > 1) {
                         await Future.delayed(const Duration(milliseconds: 5));
-                        dragOffset.value -= dragOffset.value * 0.2;
+                        controller.dragOffset.value -=
+                            controller.dragOffset.value * 0.2;
                       }
-                      dragOffset.value = 0;
-                      iconContainerColor.value = ColorConst.color2;
-                      iconColor.value = ColorConst.color1;
+                      controller.dragOffset.value = 0;
+                      controller.iconContainerColor.value = ColorConst.color2;
+                      controller.iconColor.value = ColorConst.color1;
                     });
                   },
                   child: Stack(
@@ -164,18 +153,18 @@ class Callscreen extends GetView<CallHomeController> {
                         child: Container(),
                       ),
                       Transform.translate(
-                        offset: Offset(dragOffset.value, 0),
+                        offset: Offset(controller.dragOffset.value, 0),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           height: 80,
                           width: 80,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            color: iconContainerColor.value,
+                            color: controller.iconContainerColor.value,
                           ),
                           child: SvgPicture.asset(
                             AssetsSVG.phone,
-                            color: iconColor.value,
+                            color: controller.iconColor.value,
                             fit: BoxFit.scaleDown,
                           ),
                         ),
